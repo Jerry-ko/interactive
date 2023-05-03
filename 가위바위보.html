@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤1. 가위바위보</title>
+
+    <script>
+        window.onload = () => {
+            var button = document.querySelector('.startBtn')
+            var h1 = document.getElementsByTagName("h1")[0]
+
+            var arr = ['가위', '바위', '보']
+
+            button.addEventListener('click', () => {
+                var num = Math.round(Math.random() * (arr.length-1))
+                h1.innerHTML = arr[num]
+            })
+
+        }
+
+    </script>
+</head>
+<body>
+    <button type="button" class="startBtn">리셋</button>
+    <h1>가위</h1>
+</body>
+</html>
