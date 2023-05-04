@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤2. 회전</title>
+
+    <style>
+        .arrow {
+            width: 30%;
+            transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const resetBtn = document.querySelector('.resetBtn')
+            const startBtn = document.querySelector('.startBtn')
+            const arrow = document.querySelector('.arrow')
+            const h1 =  document.getElementsByTagName('h1')[0]
+
+            let random;
+
+            resetBtn.addEventListener('click', () => {
+                random =0
+                h1.innerText = `${random} deg`
+            })
+
+            startBtn.addEventListener('click', () => {
+                random = Math.round(Math.random() * 720)
+                h1.innerText = `${random} deg`
+                arrow.style.transform = `rotate(${random}deg)`
+
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <button class="resetBtn">리셋</button>
+    <button class="startBtn">랜덤</button>
+    <h1>0deg</h1>
+
+    
+    <img class="arrow" src="./imgs/arrow.svg" alt="arrow">
+
+    
+</body>
+</html>
