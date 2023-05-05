@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤3. 업다운게임</title>
+    <style>
+        body {
+            height: 100vh
+        }
+
+        .wrap {
+            position: relative;
+            padding: 20px;
+            width: 400px;
+            top: 40%;
+            left: 50%;
+            text-align: center;
+            background: mistyrose;
+            transform: translate( -50%, -50%);
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            const input = document.getElementsByTagName('input')[0]
+            const button = document.querySelector('.startBtn')
+            const result = document.querySelector('.result')
+
+            const resultArr = ["up" , "doun", "correct!"]
+            const randomNum = 5;
+
+            button.addEventListener("click", () => {
+                resultFun()
+            })
+
+            const resultFun = () => {
+                let value = input.value
+                
+                if (value < randomNum) {
+                    result.innerText = resultArr[0]
+                } else if (value > randomNum) {
+                    result.innerText = resultArr[1]
+                } else {
+                    result.innerText = resultArr[2]
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <h1>숫자는 무엇일까요?</h1>
+        <p class="result">(1부터 10사이)</p>
+        <input type="number" value="1" min="1" max="10"/>
+        <input class="startBtn" type="button" value="확인"/>
+    </div>
+</body>
+</html>
