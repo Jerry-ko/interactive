@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤4. 업다운게임2</title>
+    
+    <style>
+        body {
+            height: 100vh;
+        }
+
+        .wrap {
+            position: relative;
+            top: 40%;
+            left: 50%;
+            padding: 30px;
+            border-radius: 20px;
+            width: 400px;
+            background: rgba(250, 128, 114, 0.4);
+            transform: translate( -50%, -50%);
+            text-align: center;
+        }
+
+    </style>
+
+    <script>
+        window.onload = () => {
+            const input = document.getElementsByTagName('input')[0]
+            const button  = document.querySelector('.startBtn')
+            const result = document.querySelector('.result')
+
+            const resultArr = ['up', 'down', 'correct!']
+            
+            const randomNumFunc = (num) => {
+                return Math.round(Math.random() * num)
+            }
+
+            let randomNum = randomNumFunc(10)
+
+            button.addEventListener('click', () => {
+                let value = input.value
+                console.log(randomNum)
+
+                if (value < randomNum) {
+                    result.innerHTML = resultArr[0]
+                } else if (value > randomNum) {
+                    result.innerHTML = resultArr[1]
+                } else {
+                    result.innerHTML = resultArr[2]
+                    alert('정답입니다')
+                    setTimeout (() => resetFunc(), 1000)
+                }
+
+            })
+
+            const resetFunc = () => {
+                input.value = 1
+                result.innerHTML = '다시 한번 더! (1부터 10 사이)'
+                randomNum = randomNumFunc(10)
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="wrap">
+        <h1>숫자는 무엇일까요?</h1>
+        <p class="result">(1과 10 사이)</p>
+        <input type="num" value ="1" min="1" max="10">
+        <button class="startBtn" type="button">확인</button>
+    </div>
+    
+</body>
+</html>
