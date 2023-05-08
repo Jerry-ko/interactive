@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머. 연봉계산기</title>
+</head>
+<style>
+    body  {
+        height: 100vh;
+    }
+
+    .wrap {
+        position: relative;
+        top: 40%;
+        left: 50%;
+        padding: 20px;
+        width: 400px;
+        transform: translate( -50%, -50%);
+        text-align: center;
+        background: lightpink;
+    }
+</style>
+<script>
+    window.onload = () => {
+        const input = document.getElementsByTagName('input')[0]
+        const button = document.querySelector('.startBtn')
+        const result = document.querySelector('.result')
+
+        button.addEventListener('click', () => {
+            interval()
+        })
+
+        let timer;
+        
+        const interval = () => {
+            clearInterval(timer)
+            console.log('input', input.value)
+
+            let value = input.value * 10000;
+            let secValue = value / 365 / 24 / 60 / 60
+
+            let secNum = 0;
+            timer = setInterval(() => {
+            secNum++;
+            result.innerHTML = `당신은 ${secNum}초에 ${(secNum*secValue).toFixed(1)}를 벌고 있습니다`            
+        }, 1000);
+        }
+       
+
+    }
+</script>
+<body>
+    <div class="wrap">
+        <h1>연봉을 입력해보세요(만)</h1>
+        <input type="number" value="5000">
+        <input class="startBtn" type="button" value="확인"/>
+        <p class="result">당신은 1초에 얼마를 벌고 있을까요?</p>
+    </div>
+</body>
+</html>
