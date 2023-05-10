@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이징. 배경</title>
+
+    <style>
+
+    </style>
+
+    <script>
+        window.onload = () => {
+            const prev = document.querySelector('.prevBtn')
+            const next = document.querySelector('.nextBtn')
+            const h1 = document.getElementsByTagName('h1')[0]
+            const body = document.getElementsByTagName('BODY')[0]
+
+            let totalNum = 4; 
+            let pageNum = Math.round(Math.random()*(totalNum-1));
+
+            let bgColorArr = ['#FF7433', '#33FFAC', '#3393FF', '#FF335B'] 
+
+            prev.addEventListener('click', () => {
+                if (pageNum > 0) {
+                    pageNum--;
+                } else {
+                    pageNum = totalNum-1
+                }
+                bgChangeColor()
+            })
+
+            next.addEventListener('click', () => {
+                if(pageNum < totalNum-1) {
+                    pageNum++;
+                } else {
+                    pageNum = 0;
+                }
+                bgChangeColor()
+            })
+
+            const bgChangeColor = () => {
+                h1.innerHTML = `${pageNum} 페이지입니다`
+                body.style.backgroundColor = bgColorArr[pageNum]
+            }
+            bgChangeColor()
+        
+        }
+
+    </script>
+</head>
+<body>
+    <input class="prevBtn" type="button" value="prev">
+    <input class="nextBtn" type="button" value="next">
+    <h1>0 페이지입니다</h1>
+    
+</body>
+</html>
