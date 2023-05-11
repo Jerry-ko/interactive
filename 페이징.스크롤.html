@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이징. 스크롤</title>
+    <style>
+        body {
+            transform:  all 2s ease-in-out;
+            overflow: hidden;
+        }
+
+        .wrap {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        section {
+            height: 100vh;
+            border-top: 20px solid black
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const body = document.getElementsByTagName('body')[0]
+            const prev = document.querySelector('.prevBtn')
+            const next = document.querySelector('.nextBtn')
+            const result = document.querySelector('.result')
+            const section = document.getElementsByTagName('section')
+
+            let pageNum = 0;
+            let bgColorArr = ['#FF7433', '#33FFAC', '#3393FF', '#FF335B'] 
+
+            prev.addEventListener('click', () => {
+
+                if (pageNum > 0) {
+                    pageNum--
+                } else {
+                    pageNum = section.length-1
+                }
+
+                bgChangeColor()
+            })
+
+            next.addEventListener('click', () => {
+                if (pageNum < section.length-1) {
+                    pageNum++
+                } else {
+                    pageNum = 0
+                }
+
+                bgChangeColor()
+            })
+
+            const bgChangeColor = () => {
+                body.style.background=bgColorArr[pageNum]
+                result.innerHTML = `${pageNum+1} 페이지입니다`
+
+                window.scrollTo ({
+                    top: section[pageNum].offsetTop,
+                    behavior: 'smooth'
+                })
+
+            }
+
+            bgChangeColor()
+            
+
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <input class="prevBtn" type="button" value="prev"/>
+        <input class="nextBtn" type="button" value="next"/>
+        <hl class="result"></hl>    
+    </div>
+
+        <section>
+            <h1>1페이지</h1>
+        </section>
+
+        <section>
+            <h1>2페이지</h1>
+        </section>
+
+        <section> 
+            <h1>3페이지</h1>
+        </section>
+
+        <section>
+            <h1>4페이지</h1>
+        </section>
+
+    
+</body>
+</html>
