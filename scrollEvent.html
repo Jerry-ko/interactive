@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 이벤트</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            transform: all 2s ease-in-out;
+            box-sizing: content-box;
+        }
+
+        .wrap {
+            position: fixed;
+            top: 50%;
+            left:40%;
+            transform : translate(-50%, -50%)
+        }
+
+        section {
+            height: 100vh;
+            border-top: dashed 2px black;
+        }
+    </style>
+    <script>
+        window.onload =() => {
+            const prev = document.querySelector('.prevBtn')
+            const next = document.querySelector('.nextBtn')
+            const body = document.getElementsByTagName('body')[0]
+            const h1 = document.getElementsByTagName('h1')[0]
+            const section = document.getElementsByTagName('section')
+
+            let pageNum = 0;
+            const bgColorArr = ['#FF7433', '#33FFAC', '#3393FF', '#FF335B'] 
+            let totalNum = section.length
+
+
+            prev.addEventListener('click', () => {
+                if (pageNum > 0) {
+                    pageNum--;
+                } else {
+                    pageNum = totalNum-1
+                }
+                pageChangeFun()
+            })
+
+            next.addEventListener('click', () => {
+                if (pageNum < totalNum-1) {
+                    pageNum++;
+                } else {
+                    pageNum = 0;
+                }
+                pageChangeFun()
+            })
+
+            const pageChangeFun = () => {
+                h1.innerHTML = `${pageNum+1} 페이지입니다` 
+                body.style.background = bgColorArr[pageNum]
+
+                // window.scrollTo({
+                //     top: section[pageNum].offsetTop,
+                //     behavior: 'smooth'
+                // })
+            }
+
+
+
+                window.addEventListener('scroll', (e) => {
+                    let scroll = window.scrollY
+
+
+                    for(let i=0; i < totalNum; i++) {
+                        if (scroll < section[i].offsetTop - window.outerHeight/2 + section[i].offsetHeight) {
+                            let first = section[i].offsetTop - window.outerHeight/2
+                            let second = section[i].offsetTop - window.outerHeight/2 + section[i].offsetHeight
+                            console.log('scroll', scroll)
+                            console.log(`section${i} first`, first)
+                            console.log(`section${i} second`, second)
+
+                            pageNum = i;
+                            break;
+                        }
+                        pageChangeFun()
+                    }
+                    
+                    // for(let i = 0; i < totalNum; i++) {
+                    //     if (scroll > section[i].offsetTop && scroll < section[i].offsetTop + section[i].offsetHeight) { 
+                    //         pageNum = i;
+                    //         console.log('page', section[i])
+                    //     }
+                    //     pageChangeFun()
+                    // }
+
+                    //스크롤 오차 발생
+                    //offsettop offsetheigt outerheight 
+                })
+
+            pageChangeFun()
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <input class="prevBtn" type="button" value="prev">
+        <input class="nextBtn" type="button" value="next">
+        <h1></h1>
+    </div>
+
+    <section>
+        <h2>1페이지</h2>
+    </section>
+    <section>
+        <h2>2페이지</h2>
+    </section>
+    <section>
+       <h2> 3페이지</h2>
+    </section>
+    <section>
+       <h2> 4페이지</h2>
+    </section>
+    
+</body>
+</html>
