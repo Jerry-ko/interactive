@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 고정 1</title>
+</head>
+<style>
+    body  {
+        overflow-x: hidden;
+        background: #000000;
+
+    }
+    section {
+        width: 100vw;
+        height: 100vh;
+        border-top : 1px dashed #333
+    }
+
+    .inner_wrap  {
+        position: relative;
+        width: 360px;
+        margin-top: 50px;
+        padding: 120px;
+        color: #ffffff
+    }
+
+    h1 {
+        margin-top: 40vh;
+        text-align: center;
+        color: #ffffff;
+        font-size: 60px;
+    }
+
+    section.active .image {
+        opacity: 1;
+    }
+
+    section .image {
+        position: fixed;
+        top: 50px;
+        right: -10%;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+</style>
+
+<script>
+    window.onload = () => {
+       const section = document.getElementsByTagName('section')
+       
+        let pageNum;
+        let totalNum = section.length
+
+        window.addEventListener('scroll', () => {
+            let scroll = this.scrollY
+
+            for (let i =0; i < totalNum; i++) {
+                if (scroll > section[i].offsetTop - window.outerHeight/2 && scroll < section[i].offsetTop - window.outerHeight/2 + section[i].offsetHeight ) {
+                    pageNum = i;
+                    break
+                }
+            }
+            pageChangeFun()
+
+        })
+
+        const pageChangeFun = () => {
+            for(let i =0; i <totalNum; i++) {
+                section[i].classList.remove('active')
+            }
+            section[pageNum].classList.add('active')
+        }
+
+    }
+</script>
+<body>
+    <section>
+        <h1>페이지 타이틀</h1>
+    </section>
+
+    <section>
+        <div class="inner_wrap">
+            <h2>페이지 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae optio nemo facilis, ipsum eveniet cupiditate accusantium voluptatibus, laborum dicta delectus ab corporis quod id? Quasi quibusdam voluptatibus nulla asperiores ut.  </p>
+        </div>
+        <img src="./image/sample1.png" class="image" alt=""/>
+    </section>
+
+    <section>
+        <div class="inner_wrap">
+            <h2>페이지 2</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In laborum tempora consequuntur ab ex? Magnam assumenda est in sapiente ipsum maiores officia quis illo veniam nulla ullam autem, soluta amet!</p>
+        </div>
+        <img src="./image/sample2.png" class="image" alt=""/>
+
+    </section>
+
+    <section>
+        <div class="inner_wrap">
+            <h2>페이지 3</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat facere ab dolorem temporibus. Reiciendis obcaecati, numquam perferendis non est iste deserunt vel, ut esse commodi quaerat minima, optio dolorum voluptas!</p>
+        </div>
+        <img src="./image/sample3.png" class="image" alt=""/>
+    </section>
+
+    <section>
+        <div class="inner_wrap">
+            <h2>페이지4</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, eligendi. Adipisci iusto distinctio corrupti corporis voluptatem, numquam incidunt reprehenderit quas fugiat maiores doloribus voluptate eius at quos consectetur magnam quod.</p>
+        </div>
+        <img src="./image/sample4.png" class="image" alt=""/>
+
+    </section>
+    
+</body>
+</html>
