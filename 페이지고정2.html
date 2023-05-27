@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 고정 2</title>
+
+    <style>
+        body {
+            overflow-x: hidden;
+            background-color: black;
+            color: white;
+        }
+
+        section {
+            width: 100vw;
+            height: 100vh
+        }
+
+
+        .innerWrap {
+            margin-top: 50px;
+            padding-left: 120px;
+            width: 300px;
+        }
+
+        h1 {
+            margin-top: 20%;
+            text-align: center;
+            
+        }
+
+        .image {
+            position: fixed;
+            top: 20px;
+            right: -20%;
+            width: 80%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image.active {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const section = document.getElementsByTagName('section')
+            const image = document.getElementsByClassName('image')
+
+            let pageNum = 0;
+            let totalNum = image.length
+
+            window.addEventListener('scroll', () => {
+                let scroll = this.scrollY
+
+                for(let i=0; i <totalNum; i++) {
+                    if (scroll > section[i].offsetTop - window.outerHeight/2 && scroll < section[i].offsetTop - window.outerHeight/2 + section[i].offsetHeight) {
+                        
+                        pageNum = i;
+                        break
+                    }
+                }
+                pageChangeFun()
+            })
+
+            const pageChangeFun = () => {
+                console.log('pagenum', pageNum)
+                for(let i =0; i < image.length; i++ ) {
+                    image[i].classList.remove('active')
+                }
+
+                image[pageNum].classList.add('active')
+            }
+
+            pageChangeFun()
+        }
+    </script>
+</head>
+<body>
+    <section>
+        <h1>타이틀</h1>
+    </section>
+
+    <section>
+        <div class="innerWrap">
+            <h2>페이지1</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic impedit facilis deleniti. Omnis aperiam animi delectus vel, qui porro quo sit repellendus maiores expedita ducimus consectetur quisquam, ipsa commodi. Ea.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="innerWrap">
+            <h2>페이지2</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic impedit facilis deleniti. Omnis aperiam animi delectus vel, qui porro quo sit repellendus maiores expedita ducimus consectetur quisquam, ipsa commodi. Ea.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="innerWrap">
+            <h2>페이지3</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic impedit facilis deleniti. Omnis aperiam animi delectus vel, qui porro quo sit repellendus maiores expedita ducimus consectetur quisquam, ipsa commodi. Ea.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="innerWrap">
+            <h2>페이지4</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic impedit facilis deleniti. Omnis aperiam animi delectus vel, qui porro quo sit repellendus maiores expedita ducimus consectetur quisquam, ipsa commodi. Ea.</p>
+        </div>
+    </section>
+
+    <div class="imageWrap">
+        <img src="./image/sample0.png" class="image" alt=""/>
+        <img src="./image/sample1.png" class="image" alt=""/>
+        <img src="./image/sample2.png" class="image" alt=""/>
+        <img src="./image/sample3.png" class="image" alt=""/>
+        <img src="./image/sample4.png" class="image" alt=""/>
+    </div>
+    
+</body>
+</html>
